@@ -21,8 +21,11 @@ app.use(express.static('public'));
 // The below points our server to a series of "route" files.
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 
-app.use('/api',require('./routes/apiRoutes'));
-app.use('/', require('./routes/htmlRoutes'));
+require('./routes/apiRoutes')(app);
+require('./routes/htmlRoutes')(app);
+
+// app.use('/api',require('./routes/apiRoutes'));
+// app.use('/', require('./routes/htmlRoutes'));
 
 // LISTENER
 // The below code effectively "starts" our server
