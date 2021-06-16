@@ -20,13 +20,14 @@ const { json } = require('express');
 
       console.log('db', db)
 
-      fs.writeFile('../db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log('complete'))
-      res.json(db);
+      fs.writeFile('./db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log('complete'))
+      res.json();
     });
     
     app.delete('/api/notes/:id', (req, res) => {
-      let index = db.findIndex(note => note.id === req.query.id);
-      note.splice(index, 1);
+      const rev = req.params.rev || req.query.rev;
+      actions.remove(req.params.id, rev, handleResult(res));
+     
 
       // readFile('db/db.json','utf8').then(notes => {
 
@@ -41,8 +42,8 @@ const { json } = require('express');
           // console.log('parsedNotes:', parsedNotes)
           // res.send(parsedNotes)
       //   })
-      res.end()
-  });
+      res.end(db)
+    });
     // app.post('/api/notes', (req, res) => {
     //   readFile('../db/db.json','utf8').then(notes => {
     //       console.log(notes)
@@ -56,5 +57,5 @@ const { json } = require('express');
     //       // res.send(parsedNotes)
     //     })
     //   });
-    };
+  };
   //module.exports = app
