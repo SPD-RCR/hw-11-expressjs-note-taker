@@ -11,10 +11,12 @@ const path = require('path');
   // Below code handles when users "visit" a page.
   // In each of the below cases the user is shown an HTML page of content
 
-  // app.get('/', (req, res) => {
-  //   res.sendFile(path.join(__dirname, '../public/index.html'));
-  // });
+  
   module.exports = (app) => {
+
+    app.get('/', (req, res) => {
+      res.sendFile(path.join(__dirname, '../public/index.html'));
+    });
 
     app.get('/notes', (req, res) => {
       res.sendFile(path.join(__dirname, '../public/notes.html'));
@@ -24,6 +26,6 @@ const path = require('path');
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../public/index.html'));
     });
-    
+
   };
   // module.exports = app
