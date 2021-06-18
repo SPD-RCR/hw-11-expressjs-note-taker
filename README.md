@@ -8,6 +8,21 @@ Your assignment is to modify starter code to create an application called Note T
 
 The application’s front end has already been created. It's your job to build the back end, connect the two, and then deploy the entire application to Heroku.
 
-## Works
+## The Note Taker application allows users to:
 
-I almost have adding the ID working. I need to change from using splice in the app.delete
+- create new notes containg a Note Title and Note Text
+- view a list of all notes by Note Title
+- select a note from the list to view the contents
+- delete any selected note from the list
+
+## Note Taker technical details
+
+- Application front end connects to an Express.js back end.
+
+- Application back end stores notes with unique IDs in the db.json file.
+
+- Application is deployed to Heroku. = https://mysterious-sands-20536.herokuapp.com/
+
+Note Taker on GitHub URL = https://github.com/SPD-RCR/hw-11-expressjs-note-taker
+
+- Application allows users to delete notes.
