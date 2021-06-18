@@ -16,7 +16,7 @@ const { json } = require('express');
 
     app.post('/api/notes', (req, res) => {
 
-      db.push(req.body);
+      db.push({...req.body,id: Math.floor(Math.random()*999999).toString()})
 
       console.log('db', db)
 
@@ -25,9 +25,16 @@ const { json } = require('express');
     });
     
     app.delete('/api/notes/:id', (req, res) => {
-      const rev = req.params.rev || req.query.rev;
-      actions.remove(req.params.id, rev, handleResult(res));
-     
+      const selectedID = req.params.id;
+      let notes = require('../db/db.json')
+      for (let index = 0; index < notes.length; index++) {
+        const element = notes[index];
+        if (selectedID === notes[index].id) {
+          notes.splice(index,1)
+        }
+      }
+      fs.writeFile('./db/db.json', JSON.stringify(notes), (err) => err ? console.error(err) : res.json(notes));
+    });
 
       // readFile('db/db.json','utf8').then(notes => {
 
@@ -37,13 +44,13 @@ const { json } = require('express');
           //write back to db.json
           //console.log(req.params.id)
 
-      console.log('delete!!!!!!!!!')
+      // console.log('delete!!!!!!!!!')
           // const parsedNotes = JSON.parse(notes)
           // console.log('parsedNotes:', parsedNotes)
           // res.send(parsedNotes)
       //   })
-      res.end(db)
-    });
+      // res.end(db)
+    // });
     // app.post('/api/notes', (req, res) => {
     //   readFile('../db/db.json','utf8').then(notes => {
     //       console.log(notes)
